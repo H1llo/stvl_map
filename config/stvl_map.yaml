@@ -1,0 +1,67 @@
+# Parameters for the FineNav STVL map plugin.
+# Clouds must already be expressed in input_frame or map_frame.  No sensor
+# extrinsic is configured here.
+stvl_map:
+  cloud_topic:
+    type: string
+    default_value: /points
+    read_only: true
+    description: PointCloud2 topic consumed by the map.
+  input_frame:
+    type: string
+    default_value: base_link
+    read_only: true
+    description: Frame treated as the robot body frame and transformed with RobotState.pose.
+  map_frame:
+    type: string
+    default_value: map
+    read_only: true
+    description: World frame in which voxel centers are stored.
+  map_length:
+    type: double
+    default_value: 20.0
+    read_only: true
+    description: Length of the cubic rolling window in metres.
+    validation:
+      gt<>: [0.0]
+  resolution:
+    type: double
+    default_value: 0.2
+    read_only: true
+    description: Voxel edge length in metres.
+    validation:
+      gt<>: [0.0]
+  decay_time_sec:
+    type: double
+    default_value: 5.0
+    description: Maximum age of an occupied voxel before it is cleared.
+    validation:
+      gt_eq<>: [0.0]
+  max_buffer_size:
+    type: int
+    default_value: 32
+    read_only: true
+    description: Maximum number of buffered point-cloud messages.
+    validation:
+      gt_eq<>: [0]
+  observation_keep_time_sec:
+    type: double
+    default_value: 1.0
+    read_only: true
+    description: Maximum age of a buffered observation, zero disables eviction.
+    validation:
+      gt_eq<>: [0.0]
+  source_timeout_sec:
+    type: double
+    default_value: 0.0
+    read_only: true
+    description: Source timeout warning threshold, zero disables it.
+    validation:
+      gt_eq<>: [0.0]
+  expected_update_rate_hz:
+    type: double
+    default_value: 0.0
+    read_only: true
+    description: Expected cloud rate for starvation warnings, zero disables them.
+    validation:
+      gt_eq<>: [0.0]
